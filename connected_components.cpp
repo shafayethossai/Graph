@@ -1,33 +1,48 @@
+// 10 7
+// 1 2
+// 1 3
+// 3 4
+// 3 5
+// 6 7
+// 8 9
+// 8 10
+
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int>v[100005];
+vector <int> v[100005];
 int vis[100005];
 
-void dfs(int node){
-    vis[node]=1;
-    for(int child: v[node])
-    {
-        if(vis[child]==0)dfs(child);
+void DFS (int node) {
+    vis[node] = 1;
+
+    for (int child : v[node]) {
+        if (vis[child] == 0) {
+            DFS(child);
+        }
     }
 }
 
-int main(){
-    int n,e;
-    cin>>n>>e;
-    while(e--){
-        int x,y;
-        cin>>x>>y;
+int main () {
+    int n, e;
+    cin >> n >> e;
+
+    while (e--) {
+        int x, y;
+        cin >> x >> y;
         v[x].push_back(y);
         v[y].push_back(x);
     }
-    int cnt=0;
-    for(int i=1;i<=n;i++){
-        if(vis[i]==0)
-        {
+
+    int cnt = 0;
+
+    for (int i = 1; i <= n; i++) {
+        if (vis[i] == 0) {
             cnt++;
-            dfs(i);
+            DFS(i);
         }
     }
-    cout<<cnt<<endl;
+    cout << cnt << endl;
+
+    return 0;
 }
