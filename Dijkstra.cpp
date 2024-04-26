@@ -1,7 +1,8 @@
+//The time complexity of Dijkstra's algorithm is O((V + E) * log(V)), where V is the number of vertices and E is the number of edges in the graph.
+
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long
 #define INF 1000000000
 
 vector <pair<int,int>> graph[1001];
@@ -41,3 +42,16 @@ int main () {
 
     return 0;
 }
+
+/*
+6 9
+1 2 4
+1 6 2
+2 3 5
+2 6 1
+6 3 8
+6 5 10
+3 4 6
+3 5 3
+5 4 5
+*/
