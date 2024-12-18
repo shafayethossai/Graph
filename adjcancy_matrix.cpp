@@ -1,31 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(){
-    int n,e;
-    cin>>n>>e;
+int main() {
+    int n, e;
+    cin >> n >> e;
+    int graph[n+1][n+1];
 
-    bool graph[n][n];
-
-    memset(graph, 0, sizeof(graph));
-
-    for(int i=1; i<=e; i++){
-        int u,v;
-        cin>>u>>v;
-
-        graph[u][v]=true;
-        graph[v][u]=true;
+    for (int i=1; i<=n; i++) {
+        for (int j=1; j<=n; j++) {
+            if (i == j) {
+                graph[i][j] = 0;
+            }
+            else {
+                graph[i][j] = -1;
+            }
+        }
     }
 
-    int q;
-    cin>>q;
+    while (e--) {
+        int u, v;
+        cin >> u >> v;
+        graph[u][v] = 1;
+        graph[v][u] = 1;
+    }
 
-    for(int i=1; i<=q; i++){
-        int u,v;
-        cin>>u>>v;
-
-        if(graph[u][v]==true) cout<<"YES"<<endl;
-        else cout<<"NO"<<endl;
+    for (int i=1; i<=n; i++) {
+        for (int j=1; j<=n; j++) {
+            cout << graph[i][j] << " ";
+        }
+        cout << endl;
     }
 
     return 0;
