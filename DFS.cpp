@@ -7,15 +7,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector <int> v [1002];
+vector<int> graph[1002];
 int vis [1003];
 
 void DFS (int node){
     vis[node] = 1;
     cout << node << " -> ";
 
-    for(int i = 0; i < v[node].size(); i++){
-        int child = v[node][i];
+    for(int i = 0; i < graph[node].size(); i++){
+        int child = graph[node][i];
+
         if(vis[child] == 0){
             DFS (child);
         }
@@ -29,8 +30,8 @@ int main () {
     while (e--) {
         int x, y;
         cin >> x >> y;
-        v[x].push_back(y);
-        v[y].push_back(x);
+        graph[x].push_back(y);
+        graph[y].push_back(x);
     }
     DFS(1);
 
