@@ -3,7 +3,6 @@ using namespace std;
 
 const int N = 1e5 + 9;
 vector<ll> graph[N];
-int col[N];
 int col[N], par[N];
 bool cycle;
 vector<ll> cycle_Path;
