@@ -1,53 +1,86 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1e5 + 9;
-int indeg[N];
-vector<int> g[N];
-bool vis[N];
+#define ll long long
+#define y push_back
+#define fast ios::sync_with_stdio(false);cin.tie(nullptr)
 
-int32_t main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int n, m; 
-    cin >> n >> m;
+const ll N = 1e5 + 9;
+vector<ll> g[N];
+ll indeg[N], vis[N];
 
-    while (m--) {
-        int u, v; 
-        cin >> u >> v;
-
-        indeg[v]++;
-        g[u].push_back(v);
-    }
-    vector<int> z;
-
-    for (int i = 1; i <= n; i++) {
-        if (indeg[i] == 0) {
-            z.push_back(i);
-            vis[i] = true;
+bool dfs (ll node, ll par) {
+    vis[node] = 1;
+    for (auto child : g[node]){
+        if (vis[child] == 0) {
+            if (dfs(child, node) == true){
+                return true;
+            }
         }
-    }
-    vector<int> ans;
-
-    while (ans.size() < n) {
-        if (z.empty()) {
-            cout << "IMPOSSIBLE\n";
-            return 0;
-        }
-        int cur = z.back();
-        z.pop_back();
-        ans.push_back(cur);
-
-        for (auto v: g[cur]) {
-            indeg[v]--;
-
-            if (!vis[v] and indeg[v] == 0) {
-                z.push_back(v);
-                vis[v] = true;
+        else {
+            if (child != par) {
+                return true;
             }
         }
     }
-    for (auto x: ans) cout << x << ' ';
+    return false;
+}
+
+void solve() {
+    ll n, m;
+    cin >> n >> m;
+    for (int i=0; i<=n; i++) {
+        g[i].clear();
+        vis[i] = 0;
+        indeg[i] = 0;
+    }
+    while (m--) {
+        ll u, v;
+        cin >> u >> v;
+        g[u].push_back(v);
+        indeg[v]++;
+    }
+    queue<ll> q;
+
+    for (int i=1; i<=n; i++) {
+        if (!indeg[i]) {
+            q.push(i);
+        }
+    }
+    vector<ll> ans;
+    
+    while (!q.empty()) {
+        ll curr = q.front();
+        q.pop();
+        ans.push_back(curr);
+        
+        for (auto child : g[curr]) {
+            indeg[child]--;
+            
+            if (indeg[child] == 0) {
+                q.push(child);
+            }
+        }
+    }
+    if (ans.size() < n) {
+        cout << "IMPOSSIBLE" << endl;
+        return;
+    }
+    for (auto it : ans) {
+        cout << it << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    fast;
+    int tc = 1;
+    //cin >> tc;
+    
+    while(tc--) {
+        solve();
+    }
+    
 
     return 0;
 }
