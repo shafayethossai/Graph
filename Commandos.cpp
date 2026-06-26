@@ -161,17 +161,8 @@ void solve() {
 
     vector<ll> dist_s = bfs(start, n);
     vector<ll> dist_d = bfs(des, n);
-
-    for (auto it: dist_s) {
-        cout << it << " ";
-    }
-    cout << endl;
-    for (auto it: dist_d) {
-        cout << it << " ";
-    }
-    cout << endl;
+    
     ll max_path = 0;
-
     for (int i=0; i<n; i++) {
         max_path = max(max_path, dist_s[i] + dist_d[i]);
     }
