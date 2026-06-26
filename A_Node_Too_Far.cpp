@@ -5,8 +5,6 @@ using namespace std;
 #define y push_back
 #define fast ios::sync_with_stdio(false);cin.tie(nullptr)
 
-
-
 const ll inf = 1e9 + 9;
 ll cs = 0;
 
